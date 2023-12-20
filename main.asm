@@ -6,8 +6,8 @@ include "photoresistor.asm" ;   program za branje vrednosti fotorezistorja   ;
 org 0x0000 ;   začetek programa   ;
 
 setup:
-            call SetupDisplay ;   nastavitev 7 segmentnega zaslona   ;
             call SetupPhotoresistor ;   nastavitev fotorezistorja   ;
+            call SetupDisplay ;   nastavitev 7 segmentnega zaslona   ;
             rjmp loop ;   skočimo na loop   ;
 
 loop:
