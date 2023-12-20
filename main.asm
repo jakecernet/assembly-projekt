@@ -13,4 +13,5 @@ setup:
             rjmp loop ;   skočimo na loop   ;
 
 loop:
+            call ReadLDR ;   preberemo vrednost fotorezistorja   ;
             jmp loop ;   skok na začetek programa   ;

@@ -12,8 +12,8 @@ SetupPhotoresistor:
                 sbi DDRD, PD3 ;   Nastavimo pin PD3 kot vhod   ;
 
                 ;   Nastavimo ADC   ;
-                sts ADMUX, r16 ;   Nastavimo ADMUX na 0   ;
-
+                ldi r16, (1 << REFS0) ;   Nastavimo ADMUX na 0   ;
+                sts ADMUX, r16
 
                 ;   Vrnemo se nazaj   ;
                 ret
@@ -21,9 +21,4 @@ SetupPhotoresistor:
 ReadLDR:
                 ;   Začnemo branje   ;
                 sbi ADCSRA, ADSC ;   Začnemo branje   ;
-
-                ;   Preberemo rezultat   ;
-                in r16, ADCH / 10 ;   Preberemo rezultat in ga delimo z 10   ;   
-
-                ;   Vrnemo se nazaj   ;
-                ret
+                
