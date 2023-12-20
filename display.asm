@@ -4,7 +4,7 @@
 
 call SetupDisplay
 
-call displayOne
+call displayTwo
 
 loop:
                 rjmp loop
@@ -60,6 +60,23 @@ displayOne:
                 out PORTD, r17
 
                 ldi r17, 0x05
+                out PORTB, r17
+
+                ret
+
+;   Prikaz števila 2   ;
+displayTwo:
+                ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
+                ldi r17, 0x00
+                out PORTD, r17
+
+                out PORTB, r17
+
+                ;   Nastavimo pine za prikaz števila 2   ;
+                ldi r17, 0b11101100
+                out PORTD, r17
+
+                ldi r17, 0x02
                 out PORTB, r17
 
                 ret
