@@ -11,42 +11,41 @@ setup:
     rjmp loop ;   skočimo na loop   ;
 
 loop:
-	call SetupPhotoresistor ;   nastavitev fotorezistorja   ;
     call ReadLDR ;   preberemo vrednost fotorezistorja   ;
     rjmp ComputeDisplay ;   izračunamo vrednost za prikaz   ;
     rjmp loop ;   skok na začetek programa   ;
 
 ComputeDisplay:
     ;   r16 = vrednost fotorezistorja   ;
-    ;   r16 primerjamo z vrednostmi od 0 do 100   ;
+    ;   r16 primerjamo z vrednostmi od 0x20 do 0xFF   ;
     ;   in glede na to prikažemo na zaslonu   ;
     ;   ustrezno številko   ;
 
-    cpi r16, 0 ;   If r16 is equal to or less than 0, display 0   ;
-    breq display0 ;   skočimo na displayZero   ;
+    cpi r16, 0x20 ;   If r16 is lower than 32 or equal to 32, display 0   ;
+    brlo display0 ;
 
-    cpi r16, 1 ;   If r16 is less than 10, display 1   ;
+    cpi r16, 0x38 ;   If r16 is lower than 60 or equal to 60, display 1   ;
     brlo display1 ;
 
-    cpi r16, 2 ;   If r16 is less than 20, display 2   ;
+    cpi r16, 0x50 ;   If r16 is lower than 88 or equal to 88, display 2   ;
     brlo display2 ;
 
-    cpi r16, 3 ;   If r16 is less than 30, display 3   ;
+    cpi r16, 0x68 ;   If r16 is lower than 116 or equal to 116, display 3   ;
     brlo display3 ;
 
-    cpi r16, 4 ;   If r16 is less than 40, display 4   ;
+    cpi r16, 0x80 ;   If r16 is lower than 144 or equal to 144, display 4   ;
     brlo display4 ;
 
-    cpi r16, 5 ;   If r16 is less than 50, display 5   ;
+    cpi r16, 0x98 ;   If r16 is lower than 172 or equal to 172, display 5   ;
     brlo display5 ;
 
-    cpi r16, 6 ;   If r16 is less than 60, display 6   ;
+    cpi r16, 0xB0 ;   If r16 is lower than 200 or equal to 200, display 6   ;
     brlo display6 ;
 
-    cpi r16, 7 ;   If r16 is less than 70, display 7   ;
+    cpi r16, 0xC8 ;   If r16 is lower than 228 or equal to 228, display 7   ;
     brlo display7 ;
 
-    cpi r16, 8 ;   If r16 is less than 80, display 8   ;
+    cpi r16, 0xE0 ;   If r16 is lower than 256 or equal to 256, display 8   ;
     brlo display8 ;
 
     ; If r16 is greater than or equal to 80, display 9

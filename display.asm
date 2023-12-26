@@ -63,10 +63,10 @@ displayTwo:
                 out PORTB, r17
 
                 ;   Nastavimo pine za prikaz števila 2   ;
-                ldi r17, 0b11101100
+                ldi r17, 0b10111011
                 out PORTD, r17
 
-                ldi r17, 0x02
+                ldi r17, 0x03
                 out PORTB, r17
 
                 ret
