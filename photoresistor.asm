@@ -9,9 +9,10 @@ SetupPhotoresistor:
                 clr r16 ;   Počistimo r16   ;
 
                 ;   Nastavimo vhodni pin   ;
-                sbi DDRC, 0 ;   Nastavimo PC0 na izhod   ;
+                cbi DDRC, 1 ;   Nastavimo PC1 kot vhod   ;
 
-                ldi r20, 0xC0
+                ;   Nastavimo ADMUX za uporabo zunanjega referenčnega napetostnega vira (AREF) z referenčno napetostjo 5V   ;
+                ldi r20, (1 << REFS0) ;   Nastavimo bit REFS0 na 1   ;
                 sts ADMUX, r20 ;   Nastavimo ADMUX   ;
 
                 ;   Nastavimo ADCSRA   ;
@@ -35,17 +36,7 @@ ReadLDR:
                 lds r16, ADCL ;   Preberemo ADCL   ;
                 lds r17, ADCH ;   Preberemo ADCH   ;
 
-                ;   Delimo z 10
-                ldi r18, 10 ;   Nastavimo r18 na 10   ;
-                call div ;   Delimo r19:r20 z r18   ;
+                ;   Za prikaz številk potrebujemo samo spodnji bajt   ;
 
                 ;   Vrnemo se nazaj   ;
                 ret
-
-;   Podprogram za deljenje   ;
-;   ; Delimo r19:r20 z r18   ;
-;   Rezultat shranimo v r16  ;
-
-div:
-            
-
