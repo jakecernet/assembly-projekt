@@ -1,12 +1,17 @@
-
+;-----------------------------------------------;
 ;   Podprogram za branje vrednosti fotoretistorja   ;
+;-----------------------------------------------;
 
+;-----------------------------------------------;
 ;   ; V r16 bomo shranjevali vrednost fotorezistorja   ;
 ;   Fotorezistor je priključen na pin A5 oz. PC5   ;
+;-----------------------------------------------;
 
 .include "knjiznica.asm"    ;   Vključimo knjižnico za izpisovanje po UART-u   ;
 
+;-----------------------------------------------;
 ;   Pripravimo UART, ADC in pin za branje   ;
+;-----------------------------------------------;
 SetupPhotoresistor:
 				call setupUART ;  Pripravimo UART   ;
 
@@ -25,7 +30,9 @@ SetupPhotoresistor:
                 ;   Vrnemo se nazaj   ;
                 ret
 
+;-----------------------------------------------;
 ;   Podprogram za branje vrednosti fotorezistorja   ;
+;-----------------------------------------------;
 ReadLDR:
                 ldi r20, 0xC7 ;   Nastavimo ADSC, ADEN, ADPS2, ADPS1, ADPS0   ;
                 sts ADCSRA, r20 ;   Nastavimo ADCSRA   ;
@@ -45,20 +52,22 @@ ReadLDR:
                 ;   Za prikazovanje številke na zaslonu potrebujemo samo visoki bajt   ;
 
                 ;-----------------------------------------------;
-                ;   Ta del kode je namenjen samo za debugganje in v primeru, da želimo   ;
-                ;   vedeti, kakšno vrednost ima fotorezistor   ;
+                ;   Ta del kode je namenjen samo za debugganje  ;
+                ;   in v primeru, da želimo vedeti, kakšno      ;
+                ;   vrednost ima fotorezistor                   ;
                 ;-----------------------------------------------;
 
                 ;   Pošljemo vrednost fotorezistorja po UART-u   ;
                 push r16    ;   Shranimo r16 na sklad   ;
                 call send_hex   ;   Pošljemo vrednost fotorezistorja po UART-u   ;
-                pop r16     ;   Vrnemo r16 iz sklada   ;
 
                 ;   Pošljemo ASCII znak za novo vrstico   ;
                 ldi r16, 0x0D
                 call send_char
                 ldi r16, 0x0A
                 call send_char
+
+                pop r16     ;   Vrnemo r16 iz sklada   ;
 
                 ;   Vrnemo se nazaj   ;
                 ret

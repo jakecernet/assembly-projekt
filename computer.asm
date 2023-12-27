@@ -1,4 +1,6 @@
+;-----------------------------------------------------------------------------;
 ;   Podprogram za izračun številke za prikaz na sedem segmentnem zaslonu   ;
+;-----------------------------------------------------------------------------;
 
 ComputeDisplay:
     ;   Vrednost fotoresistorja je shranjena v r16  ;

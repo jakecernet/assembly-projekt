@@ -1,3 +1,9 @@
+;------------------------------------------------------------;
+;   Glavni program za prikaz vrednosti fotorezistorja na 7   ;
+;   segmentnem zaslonu.   ;
+;   Avtor:   Jaka Černetič   ;
+;------------------------------------------------------------;
+
 .org 0x0134 ;   začetek programa   ;
 
 .include "display.asm" ;   Program za prikaz številk na 7 segmentnem zaslonu   ;
@@ -6,10 +12,19 @@
 
 .org 0x0000 ;   začetek programa   ;
 
+;------------------------------------------------------------;
+;   Nastavitev vseh potrebnih parametrov za delovanje   ;
+;   programa.   ;
+;------------------------------------------------------------;
+
 setup:
     call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call SetupDisplay ;   Nastavitev 7 segmentnega zaslona   ;
     rjmp loop ;   Skočimo na loop   ;
+
+;------------------------------------------------------------;
+;   Glavna zanka programa.   ;
+;------------------------------------------------------------;
 
 loop:
     call ReadLDR ;   Preberemo vrednost fotorezistorja z uporabo ADC    ;
