@@ -1,17 +1,18 @@
 ;-----------------------------------------------------------------------------------------------------------------------;
-;   Podprogram za prikaz števil na 7 segmentnem zaslonu   ;
+;                               Podprogram za prikaz števil na 7 segmentnem zaslonu                                     ;  
 ;-----------------------------------------------------------------------------------------------------------------------;
 
-;   Nastavitve za 7 segmentni zaslon   ;
+;-----------------------------------------------------------------------------------------------------------------------;
+;                                       Nastavitve za 7 segmentni zaslon                                                ;
+;-----------------------------------------------------------------------------------------------------------------------;    
 SetupDisplay:
                 ;   Vrednost iz fotoresistorja dobimo v r16   ;
                 ;   Pini za 7 segmentni zaslon so 8, 7, 6, 5, 4, 3, 2   ;
                 
                 ;   Nastavimo pine za 7 segmentni zaslon na izhod   ;
-                ldi r17, 0xFF
-                out DDRD, r17
-
-                out DDRB, r17
+                ldi r17, 0xFF   ;   1111 1111   ;
+                out DDRD, r17   ; pošljemo vrednost v register DDRD, s tem nastavimo vse pine na izhod   ;
+                out DDRB, r17   ; pošljemo vrednost v register DDRB, s tem nastavimo vse pine na izhod   ;
 
                 ;   Nastavimo vse pine za zaslon na on da preverimo ali deluje   ;
                 call displayZero
@@ -20,7 +21,7 @@ SetupDisplay:
 
 
 ;-----------------------------------------------------------------------------------------------------------------------;
-;   Tukaj se začnejo podprogrami za prikaz posameznih števil   ;
+;                               Tukaj se začnejo podprogrami za prikaz posameznih števil                                ;
 ;-----------------------------------------------------------------------------------------------------------------------;
 
 ;   Prikaz števila 0   ;

@@ -1,21 +1,21 @@
-;-----------------------------------------------;
+;---------------------------------------------------;
 ;   Podprogram za branje vrednosti fotoretistorja   ;
-;-----------------------------------------------;
+;---------------------------------------------------;
 
-;-----------------------------------------------;
-;   ; V r16 bomo shranjevali vrednost fotorezistorja   ;
-;   Fotorezistor je priključen na pin A5 oz. PC5   ;
-;-----------------------------------------------;
+;----------------------------------------------------;
+;   V r16 bomo shranjevali vrednost fotorezistorja   ;
+;    Fotorezistor je priključen na pin A5 oz. PC5    ;
+;----------------------------------------------------;
 
-.include "knjiznica.asm"    ;   Vključimo knjižnico za izpisovanje po UART-u   ;
+.include "knjiznica.asm"    ;   Vključimo knjižnico za izpisovanje po UART-u na serijski vmesnik  ;
 
 ;-----------------------------------------------;
 ;   Pripravimo UART, ADC in pin za branje   ;
 ;-----------------------------------------------;
 SetupPhotoresistor:
-				call setupUART ;  Pripravimo UART   ;
+				call setupUART ;  Pripravimo UART z uporabo funkcije setupUART iz knjižnice  ;
 
-                clr r16 ;   Počistimo r16   ;
+                clr r16 ;   Počistimo r16 za branje vrednosti fotorezistorja   ;
 
                 sbi DDRC, 5 ;   Nastavimo PC5 (analog pin A5) kot vhod   ;
 
@@ -27,12 +27,11 @@ SetupPhotoresistor:
                 ldi r20, 0x87 ;   Nastavimo ADEN, ADPS2, ADPS1, ADPS0   ;
                 sts ADCSRA, r20
 
-                ;   Vrnemo se nazaj   ;
                 ret
 
-;-----------------------------------------------;
+;---------------------------------------------------;
 ;   Podprogram za branje vrednosti fotorezistorja   ;
-;-----------------------------------------------;
+;---------------------------------------------------;
 ReadLDR:
                 ldi r20, 0xC7 ;   Nastavimo ADSC, ADEN, ADPS2, ADPS1, ADPS0   ;
                 sts ADCSRA, r20 ;   Nastavimo ADCSRA   ;

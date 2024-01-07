@@ -1,7 +1,13 @@
 ;------------------------------------------------------------;
 ;   Glavni program za prikaz vrednosti fotorezistorja na 7   ;
-;   segmentnem zaslonu.   ;
-;   Avtor:   Jaka Černetič   ;
+;                   segmentnem zaslonu.                      ;
+;------------------------------------------------------------;
+
+;   Program je napisan v jeziku Assembler za mikrokrmilnik   ;
+;   ATmega328P. Program je napisan za delovanje na 16MHz     ;
+
+;------------------------------------------------------------;
+;               Avtor:   Jaka Černetič                       ;
 ;------------------------------------------------------------;
 
 .org 0x0134 ;   začetek programa   ;
@@ -13,19 +19,16 @@
 .org 0x0000 ;   začetek programa   ;
 
 ;------------------------------------------------------------;
-;   Nastavitev vseh potrebnih parametrov za delovanje   ;
-;   programa.   ;
+;   Nastavitev vseh potrebnih zadev za delovanje programa.   ;
 ;------------------------------------------------------------;
-
 setup:
     call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call SetupDisplay ;   Nastavitev 7 segmentnega zaslona   ;
     rjmp loop ;   Skočimo na loop   ;
 
 ;------------------------------------------------------------;
-;   Glavna zanka programa.   ;
+;                   Glavna zanka programa.                   ;
 ;------------------------------------------------------------;
-
 loop:
     call ReadLDR ;   Preberemo vrednost fotorezistorja z uporabo ADC    ;
     rjmp ComputeDisplay ;   Izračunamo vrednost za prikaz številke na 7 segmentnem zaslonu   ;
