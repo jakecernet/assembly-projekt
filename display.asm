@@ -7,7 +7,6 @@
 ;-----------------------------------------------------------------------------------------------------------------------;    
 SetupDisplay:
                 ;   Vrednost iz fotoresistorja dobimo v r16   ;
-                ;   Pini za 7 segmentni zaslon so 8, 7, 6, 5, 4, 3, 2   ;
                 
                 ;   Nastavimo pine za 7 segmentni zaslon na izhod   ;
                 ldi r17, 0xFF   ;   1111 1111   ;
@@ -15,10 +14,19 @@ SetupDisplay:
                 out DDRB, r17   ; pošljemo vrednost v register DDRB, s tem nastavimo vse pine na izhod   ;
 
                 ;   Nastavimo vse pine za zaslon na on da preverimo ali deluje   ;
-                call displayZero
+                call displayEight
 
                 ret
 
+;   Reset 7 segmentnega zaslona   ;
+ClearDisplay:
+                ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
+                ldi r17, 0x00
+                out PORTD, r17
+
+                out PORTB, r17
+
+                ret
 
 ;-----------------------------------------------------------------------------------------------------------------------;
 ;                               Tukaj se začnejo podprogrami za prikaz posameznih števil                                ;
@@ -27,10 +35,7 @@ SetupDisplay:
 ;   Prikaz števila 0   ;
 displayZero:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 0   ;
                 ldi r17, 0b01111100
@@ -44,10 +49,7 @@ displayZero:
 ;   Prikaz števila 1   ;
 displayOne:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 1   ;
                 ldi r17, 0b00001101
@@ -61,10 +63,7 @@ displayOne:
 ;   Prikaz števila 2   ;
 displayTwo:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 2   ;
                 ldi r17, 0b10111011
@@ -78,10 +77,7 @@ displayTwo:
 ;   Prikaz števila 3   ;
 displayThree:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 3   ;
                 ldi r17, 0b10111100
@@ -95,10 +91,7 @@ displayThree:
 ;   Prikaz števila 4   ;
 displayFour:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 4   ;
                 ldi r17, 0b11001100
@@ -112,10 +105,7 @@ displayFour:
 ;   Prikaz števila 5   ;
 displayFive:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 5   ;
                 ldi r17, 0b11110100
@@ -129,10 +119,7 @@ displayFive:
 ;   Prikaz števila 6   ;
 displaySix:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 6   ;
                 ldi r17, 0b11110100
@@ -146,10 +133,7 @@ displaySix:
 ;   Prikaz števila 7   ;
 displaySeven:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 7   ;
                 ldi r17, 0b00011101
@@ -163,10 +147,7 @@ displaySeven:
 ;   Prikaz števila 8   ;
 displayEight:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 8   ;
                 ldi r17, 0b11111100
@@ -180,10 +161,7 @@ displayEight:
 ;   Prikaz števila 9   ;
 displayNine:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
+                call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 0   ;
                 ldi r17, 0b11111100
