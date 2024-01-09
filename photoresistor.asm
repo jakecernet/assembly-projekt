@@ -17,7 +17,7 @@ SetupPhotoresistor:
 
                 clr r16 ;   Počistimo r16 za branje vrednosti fotorezistorja   ;
 
-                sbi DDRC, 5 ;   Nastavimo PC5 (analog pin A5) kot vhod   ;
+                sbi DDRC, 0 ;   Nastavimo pin PC0 kot vhod   ;
 
                 ;   Nastavimo ADMUX (ADC Multiplexer Selection Register)   ;
                 ldi r20, 0x60 ;   Nastavimo REFS1, REFS0   ;

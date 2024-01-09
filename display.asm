@@ -9,28 +9,34 @@ SetupDisplay:
                 ;   Vrednost iz fotoresistorja dobimo v r16   ;
                 
                 ;   Nastavimo pine za 7 segmentni zaslon na izhod   ;
-                ldi r17, 0xFF   ;   1111 1111   ;
-                out DDRD, r17   ; pošljemo vrednost v register DDRD, s tem nastavimo vse pine na izhod   ;
-                out DDRB, r17   ; pošljemo vrednost v register DDRB, s tem nastavimo vse pine na izhod   ;
+                ;   Pini so A5 - A1 ter D2 in D3   ;
+
+                ;   Nastavimo pine na PORTC (A5 - A1) na izhod   ;
+                ldi r17, 0b00111111
+                out DDRC, r17       
+
+                ;   Nastavimo pine na PORTD (Digitalni pini D2 in D3) na izhod   ;
+                ldi r17, 0xFF
+                out DDRD, r17
 
                 ;   Nastavimo vse pine za zaslon na on da preverimo ali deluje   ;
                 call displayEight
 
                 ret
 
-;   Reset 7 segmentnega zaslona   ;
-ClearDisplay:
-                ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
-                ldi r17, 0x00
-                out PORTD, r17
-
-                out PORTB, r17
-
-                ret
 
 ;-----------------------------------------------------------------------------------------------------------------------;
 ;                               Tukaj se začnejo podprogrami za prikaz posameznih števil                                ;
 ;-----------------------------------------------------------------------------------------------------------------------;
+
+;   Reset 7 segmentnega zaslona   ;
+ClearDisplay:
+                ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
+                ldi r17, 0b00000000
+                out PORTC, r17
+                out PORTD, r17
+
+                ret
 
 ;   Prikaz števila 0   ;
 displayZero:
@@ -38,11 +44,11 @@ displayZero:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 0   ;
-                ldi r17, 0b01111100
-                out PORTD, r17
+                ldi r17, 0b00111011
+                out PORTC, r17
 
-                ldi r17, 0x01
-                out PORTB, r17
+                ldi r17, 0xFF
+                out PORTD, r17
 
                 ret
 
@@ -52,11 +58,11 @@ displayOne:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 1   ;
-                ldi r17, 0b00001101
-                out PORTD, r17
+                ldi r17, 0b00100001
+                out PORTC, r17
 
-                ldi r17, 0x00
-                out PORTB, r17
+                ldi r17, 0b0000000100
+                out PORTD, r17
 
                 ret
 
@@ -66,11 +72,11 @@ displayTwo:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 2   ;
-                ldi r17, 0b10111011
-                out PORTD, r17
+                ldi r17, 0b00110110
+                out PORTC, r17
 
-                ldi r17, 0x03
-                out PORTB, r17
+                ldi r17, 0b00001000
+                out PORTD, r17
 
                 ret
 
@@ -80,11 +86,11 @@ displayThree:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 3   ;
-                ldi r17, 0b10111100
-                out PORTD, r17
+                ldi r17, 0b00110100
+                out PORTC, r17
 
-                ldi r17, 0x00
-                out PORTB, r17
+                ldi r17, 0b00001111
+                out PORTD, r17
 
                 ret
 
@@ -94,11 +100,11 @@ displayFour:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 4   ;
-                ldi r17, 0b11001100
-                out PORTD, r17
+                ldi r17, 0b00101101
+                out PORTC, r17
 
-                ldi r17, 0x00
-                out PORTB, r17
+                ldi r17, 0b0000000100
+                out PORTD, r17
 
                 ret
 
@@ -108,11 +114,11 @@ displayFive:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 5   ;
-                ldi r17, 0b11110100
-                out PORTD, r17
+                ldi r17, 0b00011101
+                out PORTC, r17
 
-                ldi r17, 0x02
-                out PORTB, r17
+                ldi r17, 0b00001100
+                out PORTD, r17
 
                 ret
 
@@ -122,11 +128,11 @@ displaySix:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 6   ;
-                ldi r17, 0b11110100
-                out PORTD, r17
+                ldi r17, 0b00011111
+                out PORTC, r17
 
-                ldi r17, 0x03
-                out PORTB, r17
+                ldi r17, 0b00001111
+                out PORTD, r17
 
                 ret
 
@@ -136,11 +142,11 @@ displaySeven:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 7   ;
-                ldi r17, 0b00011101
-                out PORTD, r17
+                ldi r17, 0b00110001
+                out PORTC, r17
 
-                ldi r17, 0x00
-                out PORTB, r17
+                ldi r17, 0b0000000100
+                out PORTD, r17
 
                 ret
 
@@ -150,11 +156,11 @@ displayEight:
                 call ClearDisplay
 
                 ;   Nastavimo pine za prikaz števila 8   ;
-                ldi r17, 0b11111100
-                out PORTD, r17
+                ldi r17, 0b00111111
+                out PORTC, r17
 
-                ldi r17, 0x05
-                out PORTB, r17
+                ldi r17, 0b00001111
+                out PORTD, r17
 
                 ret
 
@@ -163,11 +169,11 @@ displayNine:
                 ;   Nastavimo vse pine na 7 segmentnem zaslonu na off   ;
                 call ClearDisplay
 
-                ;   Nastavimo pine za prikaz števila 0   ;
-                ldi r17, 0b11111100
-                out PORTD, r17
+                ;   Nastavimo pine za prikaz števila 6   ;
+                ldi r17, 0b00111101
+                out PORTC, r17
 
-                ldi r17, 0x00
-                out PORTB, r17
+                ldi r17, 0b00001111
+                out PORTD, r17
 
                 ret

@@ -15,6 +15,7 @@
 .include "display.asm" ;   Program za prikaz številk na 7 segmentnem zaslonu   ;
 .include "photoresistor.asm" ;   Program za branje vrednosti fotorezistorja   ;
 .include "computer.asm" ;   Program za izračun vrednosti za prikaz   ;
+.include "LCD.asm" ;   Program za prikaz na LCD zaslonu   ;
 
 .org 0x0000 ;   začetek programa   ;
 
@@ -24,6 +25,7 @@
 setup:
     call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call SetupDisplay ;   Nastavitev 7 segmentnega zaslona   ;
+    call LCD_write ;   Nastavitev LCD zaslona   ;
     rjmp loop ;   Skočimo na loop   ;
 
 ;------------------------------------------------------------;
