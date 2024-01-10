@@ -17,7 +17,7 @@ SetupPhotoresistor:
 
                 clr r16 ;   Počistimo r16 za branje vrednosti fotorezistorja   ;
 
-                sbi DDRC, 0 ;   Nastavimo pin PC0 kot vhod   ;
+                sbi DDRC, 5 ;   Nastavimo pin PC0 kot vhod   ;
 
                 ;   Nastavimo ADMUX (ADC Multiplexer Selection Register)   ;
                 ldi r20, 0x60 ;   Nastavimo REFS1, REFS0   ;
@@ -45,8 +45,8 @@ ReadLDR:
 	            sts ADCSRA, r17 ;   Nastavimo ADCSRA   ;
 
                 ;   Preberemo rezultat   ;
-                lds r17, ADCL ;   Preberemo ADCL (Nizki bajt ADC rezultata)   ;
-                lds r16, ADCH ;   Preberemo ADCH (Visoki bajt ADC rezultata)   ;
+                lds r22, ADCL ;   Preberemo ADCL (Nizki bajt ADC rezultata)   ;
+                lds r23, ADCH ;   Preberemo ADCH (Visoki bajt ADC rezultata)   ;
 
                 ;   Za prikazovanje številke na zaslonu potrebujemo samo visoki bajt   ;
 
@@ -57,16 +57,16 @@ ReadLDR:
                 ;-----------------------------------------------;
 
                 ;   Pošljemo vrednost fotorezistorja po UART-u   ;
-                push r16    ;   Shranimo r16 na sklad   ;
+                push r23    ;   Shranimo r16 na sklad   ;
                 call send_hex   ;   Pošljemo vrednost fotorezistorja po UART-u   ;
 
                 ;   Pošljemo ASCII znak za novo vrstico   ;
-                ldi r16, 0x0D
+                ldi r23, 0x0D
                 call send_char
-                ldi r16, 0x0A
+                ldi r23, 0x0A
                 call send_char
 
-                pop r16     ;   Vrnemo r16 iz sklada   ;
+                pop r23     ;   Vrnemo r16 iz sklada   ;
 
                 ;   Vrnemo se nazaj   ;
                 ret

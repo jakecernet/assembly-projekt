@@ -35,7 +35,9 @@ stopprinting:	ret
 ;  r16 - stevilka, ki jo zelimo izpisati na UART 
 ;****************************************************************************************************
 				; v r16 damo vrednost, na UART dobimo dve ASCII šestnajstiški števki  (0xFF --> 'FF')
-send_hex:		push r16			; kako pretvorimo vrednosti od 0 do 9 v '0' do '9'?
+send_hex:		
+				mov r16, r23
+				push r16			; kako pretvorimo vrednosti od 0 do 9 v '0' do '9'?
 									; kaj pa od 10 do 15 v 'A' do 'F'?
 				swap r16			; zamenjamo visoki in nizki del byta
 				andi r16, 0x0F		; zanimajo nas samo štirje biti

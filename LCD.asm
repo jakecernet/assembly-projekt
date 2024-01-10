@@ -1,4 +1,10 @@
-;================================================================
+;------------------------------------------------------------------------------------------;
+;                             Podprogram za prikazovanje na LCD                            ;
+;                                Večina tega programa je iz:                               ;
+;   https://akuzechie.blogspot.com/2021/10/assembly-via-arduino-programming-lcd.html?m=1   ;
+;------------------------------------------------------------------------------------------;
+
+;     Začetno stanje LCD-ja    ;
 LCD_write:
       LDI   R16, 0xFF
       OUT   DDRD, R16         ;set port D o/p for data
@@ -222,3 +228,16 @@ l7: DEC   R22         ;decrement inner loop
     BRNE  l5          ;loop if not zero
     RET               ;return to caller
 ;----------------------------------------------------------------
+
+displayBrightness:
+    ldi ZL, low(banana*2)
+    ldi ZH, high(banana*2)
+    
+render_loop:
+    lpm r16, Z+
+    call data_wrt
+    tst r16
+    brne render_loop
+	ret
+banana:
+      .db "   Brightness   ", 0

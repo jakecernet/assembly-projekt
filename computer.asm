@@ -3,39 +3,39 @@
 ;-----------------------------------------------------------------------------;
 
 ComputeDisplay:
-    ;   Vrednost fotoresistorja je shranjena v r16  ;
+    ;   Vrednost fotoresistorja je shranjena v r23  ;
     ;   Vrednost fotoresistorja primerjamo z vrednostmi, ki ustrezajo posameznim številkam   ;
     ;   Če je vrednost fotoresistorja manjša od vrednosti, ki ustreza posamezni številki, prikažemo to številko   ;
     ;   Če je vrednost fotoresistorja večja od vrednosti, ki ustreza številki, gremo na naslednjo številko   ;
 
-    cpi r16, 0x20 ;   Če je r16 manjši od 32 ali enak 32, prikažemo 0   ;
+    cpi r23, 0x20 ;   Če je r23 manjši od 32 ali enak 32, prikažemo 0   ;
     brlo display0 ;
 
-    cpi r16, 0x38 ;   Če je r16 manjši od 56 ali enak 56, prikažemo 1 itd. itd.  ;
+    cpi r23, 0x38 ;   Če je r23 manjši od 56 ali enak 56, prikažemo 1 itd. itd.  ;
     brlo display1 ;
 
-    cpi r16, 0x50 ;   
+    cpi r23, 0x50 ;   
     brlo display2 ;
 
-    cpi r16, 0x68 ;  
+    cpi r23, 0x68 ;  
     brlo display3 ;
 
-    cpi r16, 0x80 ;   
+    cpi r23, 0x80 ;   
     brlo display4 ;
 
-    cpi r16, 0x98 ;   
+    cpi r23, 0x98 ;   
     brlo display5 ;
 
-    cpi r16, 0xB0 ;   
+    cpi r23, 0xB0 ;   
     brlo display6 ;
 
-    cpi r16, 0xC8 ;   
+    cpi r23, 0xC8 ;   
     brlo display7 ;
 
-    cpi r16, 0xE0 ;   
+    cpi r23, 0xE0 ;   
     brlo display8 ;
 
-    ;   Če je r16 večji od 224, prikažemo 9   ;
+    ;   Če je r23 večji od 224, prikažemo 9   ;
     rjmp display9 ;
 
     ;   Skočimo na začetek programa   ;

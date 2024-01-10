@@ -23,9 +23,10 @@
 ;   Nastavitev vseh potrebnih zadev za delovanje programa.   ;
 ;------------------------------------------------------------;
 setup:
-    call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call SetupDisplay ;   Nastavitev 7 segmentnega zaslona   ;
+	call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call LCD_write ;   Nastavitev LCD zaslona   ;
+	call displayBrightness
     rjmp loop ;   Skočimo na loop   ;
 
 ;------------------------------------------------------------;
