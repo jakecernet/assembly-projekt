@@ -12,7 +12,7 @@ SetupDisplay:
                 ;   Pini so A5 - A1 ter D2 in D3   ;
 
                 ;   Nastavimo pine na PORTC (A5 - A1) na izhod   ;
-                ldi r17, 0b00111111
+                ldi r17, 0b00111110
                 out DDRC, r17       
 
                 ;   Nastavimo pine na PORTD (Digitalni pini D2 in D3) na izhod   ;
