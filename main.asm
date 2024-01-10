@@ -27,7 +27,6 @@ setup:
 	call SetupPhotoresistor ;   Nastavitev fotorezistorja in ADC   ;
     call LCD_write ;   Nastavitev LCD zaslona   ;
 	call displayBrightness
-	call displayCurrent
     rjmp loop ;   Skočimo na loop   ;
 
 ;------------------------------------------------------------;

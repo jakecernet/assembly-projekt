@@ -87,35 +87,16 @@ data_wrt:
       RET
 ;================================================================
 disp_message:
-      LDI   R16, 'A'          ;display characters
-      RCALL data_wrt          ;via data register
-      RCALL delay_seconds     ;delay 0.25s
-      LDI   R16, 's'
+      LDI   R16, 'I'
       RCALL data_wrt
       RCALL delay_seconds
-      LDI   R16, 's'
+      LDI   R16, 'n'
       RCALL data_wrt
       RCALL delay_seconds
-      LDI   R16, 'e'
+      LDI   R16, 'i'
       RCALL data_wrt
       RCALL delay_seconds
-      LDI   R16, 'm'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'b'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'l'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'y'
-      RCALL data_wrt
-      RCALL delay_seconds
-      ;----------------
-      LDI   R16, ' '
-      RCALL data_wrt
-      ;----------------
-      LDI   R16, 'v'
+      LDI   R16, 't'
       RCALL data_wrt
       RCALL delay_seconds
       LDI   R16, 'i'
@@ -124,46 +105,13 @@ disp_message:
       LDI   R16, 'a'
       RCALL data_wrt
       RCALL delay_seconds
-      ;----------------
-      LDI   R16, ' '
-      RCALL data_wrt
-      ;----------------
-      LDI   R16, 'U'
+      LDI   R16, 'l'
       RCALL data_wrt
       RCALL delay_seconds
-      LDI   R16, 'N'
+      LDI   R16, 'i'
       RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'O'
-      RCALL data_wrt
-      RCALL delay_seconds
-      ;----------------
-      LDI   R16, 0xC0         ;cursor beginning of 2nd line
-      RCALL command_wrt
-      RCALL delay_ms
-      ;----------------
-      LDI   R16, 'P'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'r'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'o'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'g'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'r'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'a'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'm'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, 'm'
+      rcall delay_seconds
+      LDI   R16, 'z'
       RCALL data_wrt
       RCALL delay_seconds
       LDI   R16, 'i'
@@ -175,10 +123,9 @@ disp_message:
       LDI   R16, 'g'
       RCALL data_wrt
       RCALL delay_seconds
-      ;----------------
       LDI   R16, ' '
       RCALL data_wrt
-      ;----------------
+      RCALL delay_seconds
       LDI   R16, 'L'
       RCALL data_wrt
       RCALL delay_seconds
@@ -186,9 +133,6 @@ disp_message:
       RCALL data_wrt
       RCALL delay_seconds
       LDI   R16, 'D'
-      RCALL data_wrt
-      RCALL delay_seconds
-      LDI   R16, '!'
       RCALL data_wrt
       ;----------------
       LDI   R17, 12           ;wait 3 seconds
@@ -240,25 +184,4 @@ render_loop:
     brne render_loop
 	ret
 banana:
-      .db "   Brightness   ", 0
-
-
-;     Prikaže trenutno vrednost registra 23 v spodnji vrstici LCD-ja    ; 
-displayCurrent:
-      ldi ZL, low(current*2)
-      ldi ZH, high(current*2)
-
-      LDI   R16, 0xC0         ;cursor beginning of 2nd line
-      RCALL command_wrt
-      RCALL delay_ms
-
-render_loop2:
-      lpm r16, Z+
-      call data_wrt
-      RCALL delay_ms
-      tst r16
-      brne render_loop2
-      ret
-
-current:
-      .db "   Current   ", 0
+      .db " Brightness --> ", 0
