@@ -241,3 +241,24 @@ render_loop:
 	ret
 banana:
       .db "   Brightness   ", 0
+
+
+;     Prikaže trenutno vrednost registra 23 v spodnji vrstici LCD-ja    ; 
+displayCurrent:
+      ldi ZL, low(current*2)
+      ldi ZH, high(current*2)
+
+      LDI   R16, 0xC0         ;cursor beginning of 2nd line
+      RCALL command_wrt
+      RCALL delay_ms
+
+render_loop2:
+      lpm r16, Z+
+      call data_wrt
+      RCALL delay_ms
+      tst r16
+      brne render_loop2
+      ret
+
+current:
+      .db "   Current   ", 0
