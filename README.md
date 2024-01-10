@@ -1,4 +1,4 @@
-# Prikazovalnik svetlosti, napisan v Assemblerju za Arduino Uno.
+# Prikazovalnik svetlosti, napisan v Assemblerju za Arduino Uno. (readme je mal deprecatan)
 
 <br>
 
